@@ -1,0 +1,133 @@
+@Metadata.layer: #CORE
+
+@UI: {
+   headerInfo: {
+     typeName: 'Plant Shop Order',
+     typeNamePlural: 'Plant Shop Orders'
+               }
+     }
+
+annotate entity Z14_C_Order with
+{
+
+  @UI.facet: [
+    { id:               'HeaderNetAmount',
+      purpose:          #HEADER,
+      type:             #DATAPOINT_REFERENCE,
+      targetQualifier:  'ItemsTotalPrice',
+      position:         5 },
+
+    { id:               'HeaderTotalAmount',
+      purpose:          #HEADER,
+      type:             #DATAPOINT_REFERENCE,
+      targetQualifier:  'TotalPrice',
+      position:         6 },
+
+    { id:              'OrderDetails',
+      purpose:         #STANDARD,
+      type:            #IDENTIFICATION_REFERENCE,
+      label:           'Order General Information',
+      position:        10 },
+
+    { id:              'OrderItems',
+      purpose:         #STANDARD,
+      type:            #LINEITEM_REFERENCE,
+      label:           'Order Items',
+      position:        20,
+      targetElement:   '_Items' },
+
+    { id:              'Deliveries',
+      purpose:         #STANDARD,
+      type:            #LINEITEM_REFERENCE,
+      label:           'Deliveries',
+      position:        30,
+      targetElement:   '_Deliveries'},
+
+    { id: 'Customer',
+      purpose: #STANDARD,
+      type: #FIELDGROUP_REFERENCE,
+      label: 'Customer Information',
+      position: 40,
+      targetQualifier: 'CustomerGroup'
+     },
+
+    { id: 'Employee',
+      purpose: #STANDARD,
+      type: #FIELDGROUP_REFERENCE,
+      label: 'Employee Information',
+      position: 50,
+      targetQualifier: 'EmployeeGroup'
+     }
+  ]
+
+
+  @UI.lineItem:       [ { position: 10 }, 
+                        { type: #FOR_ACTION, 
+                            dataAction: 'cancelOrder', 
+                            label: 'Cancel' }
+                        ]
+  @UI.identification: [ { position: 10 } ]
+  @EndUserText.label: 'Order ID'
+  OrderId;
+
+  @UI.lineItem:       [ { position: 20 } ]
+  @UI.identification: [ { position: 20 } ]
+  @EndUserText.label: 'Order Date'
+  @UI.selectionField: [ { position: 10 } ]
+  OrderDate;
+
+  @Consumption.valueHelpDefinition:
+        [{ entity: { name: 'Z14_I_OrderStatus_VH', element: 'StatusText' } }]
+  @UI.lineItem:       [ { position: 30, criticality: 'StatusCriticality' } ]
+  @UI.identification: [ { position: 30, criticality: 'StatusCriticality' } ]
+  @EndUserText.label: 'Order Status'
+  @UI.selectionField: [ { position: 20 } ]    
+  OrderStatus;
+
+  @Consumption.valueHelpDefinition:
+        [{ entity: { name: 'Z14_I_Customer_VH', element: 'CustomerId' } }]
+  @UI.lineItem:       [ { position: 40 } ]
+  @UI.identification: [ { position: 40 } ]
+  @EndUserText.label: 'Customer'
+  @UI.selectionField: [ { position: 30 } ]
+  CustomerId;
+
+  @Consumption.valueHelpDefinition:
+        [{ entity: { name: 'Z14_I_Employee_VH', element: 'EmployeeId' } }]
+  @UI.lineItem:       [ { position: 50 } ]
+  @UI.identification: [ { position: 50 } ]
+  @EndUserText.label: 'Employee'
+  @UI.selectionField: [ { position: 40 } ]
+  EmployeeId;
+
+  @UI.dataPoint:      { title: 'Net Amount', targetValueElement: 'ItemsTotalPrice' }
+  @UI.lineItem:       [ { position: 60 } ]
+  @UI.identification: [ { position: 60 } ]
+  @EndUserText.label: 'Items Net Amount'
+  @UI.selectionField: [ { position: 50 } ]
+  ItemsTotalPrice;
+
+  @UI.dataPoint:      { title: 'Total Amount incl. Shipping', targetValueElement: 'TotalPrice' }
+  @UI.lineItem:       [ { position: 70 } ]
+  @UI.identification: [ { position: 70 } ]
+  @EndUserText.label: 'Total Price incl. Shipping'
+  @UI.selectionField: [ { position: 60 } ]
+  TotalPrice;
+
+  @UI.hidden: true
+  CurrencyCode;
+
+  //  CUSTOMER
+  @UI.fieldGroup:     [ { qualifier: 'CustomerGroup', position: 10 } ]
+  @EndUserText.label: 'E-mail'
+  CustomerEmail;
+
+  @UI.fieldGroup:     [ { qualifier: 'CustomerGroup', position: 20 } ]
+  @EndUserText.label: 'Address'
+  CustomerCity;
+
+  //  EMPLOYEE
+  @UI.fieldGroup:     [ { qualifier: 'EmployeeGroup', position: 10 } ]
+  @EndUserText.label: 'Role'
+  EmployeeRole;
+}

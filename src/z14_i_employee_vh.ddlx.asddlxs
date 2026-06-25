@@ -1,0 +1,31 @@
+@Metadata.layer: #CORE
+@Search.searchable: true
+annotate entity Z14_I_EMPLOYEE_VH with
+{
+  @UI.lineItem: [ { position: 10 } ]
+  @UI.identification: [ { position: 10 } ]
+  @EndUserText.label: 'Employee ID'
+  @Search.defaultSearchElement: true
+  EmployeeId;
+
+  @UI.lineItem: [ { position: 20 } ]
+  @UI.identification: [ { position: 20 } ]
+  @EndUserText.label: 'Employee full name'
+  FullName;
+
+  @UI.lineItem: [ { position: 30 } ]
+  @UI.identification: [ { position: 30 } ]
+  @EndUserText.label: 'Employee role'
+  Role;
+
+  @UI.hidden: true
+  @Search.defaultSearchElement: true
+  @Search.fuzzinessThreshold: 0.8
+  FirstName;
+  
+  @UI.hidden: true
+  @Search.defaultSearchElement: true
+  @Search.fuzzinessThreshold: 0.8
+  LastName;
+
+}

@@ -1,0 +1,103 @@
+managed implementation in class zbp_14_i_order unique;
+strict ( 2 );
+with draft;
+
+define behavior for Z14_I_Order alias Order
+persistent table z14_order
+draft table z14_order_draft
+lock master total etag LocalLastChangedAt
+authorization master ( global )
+early numbering
+{
+  create;
+  update;
+  delete;
+
+  draft action Edit;
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+
+  field ( readonly ) OrderId;
+  field ( readonly ) TotalPrice, CurrencyCode, ItemsTotalPrice;
+
+  association _Deliveries { create; with draft; }
+  association _Items { create; with draft; }
+
+  determination setInitialOrderData on modify { create; }
+
+  action cancelOrder result [1] $self;
+
+  mapping for z14_order
+    {
+      OrderId            = order_id;
+      CustomerId         = customer_id;
+      EmployeeId         = employee_id;
+      OrderDate          = order_date;
+      OrderStatus        = order_status;
+      LocalLastChangedAt = local_last_changed_at;
+    }
+}
+
+
+define behavior for Z14_I_OrderItem alias Item
+implementation in class zbp_14_i_item unique
+persistent table z14_order_item
+
+draft table z14_item_draft
+lock dependent by _Order
+authorization dependent by _Order
+early numbering
+{
+  update;
+  delete;
+
+  field ( readonly ) OrderId, OrderItemId;
+
+  association _Order { with draft; }
+
+  determination setInitialItemData on modify { create; }
+
+  mapping for z14_order_item
+    {
+      OrderId       = order_id;
+      OrderItemId   = order_item_id;
+      PlantId       = plant_id;
+      OrderQuantity = order_quantity;
+      QuantityUnit  = quantity_unit;
+      UnitPrice     = unit_price;
+      CurrencyCode  = currency_code;
+    }
+}
+
+define behavior for Z14_I_Delivery alias Delivery
+implementation in class zbp_14_i_delivery unique
+persistent table z14_delivery
+draft table z14_delivery_d
+lock dependent by _Order
+authorization dependent by _Order
+early numbering
+{
+  update;
+  delete;
+
+  field ( readonly ) DeliveryId, OrderId;
+
+  association _Order { with draft; }
+
+  determination setInitialDeliveryData on modify { create; }
+
+  validation validateOrderDates on save { create; update; field ShippingDate; }
+
+  mapping for z14_delivery
+    {
+      DeliveryId     = delivery_id;
+      OrderId        = order_id;
+      DeliveryStatus = delivery_status;
+      ShippingDate   = shipping_date;
+      DeliveryCost   = delivery_cost;
+      CurrencyCode   = currency_code;
+      TrackingNumber = tracking_number;
+    }
+}

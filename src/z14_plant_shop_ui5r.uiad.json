@@ -1,0 +1,34 @@
+{
+  "formatVersion": "2",
+  "header": {
+    "description": "Fiori Elements Application for Plant Shop Orders",
+    "originalLanguage": "en",
+    "abapLanguageVersion": "cloudDevelopment"
+  },
+  "generalInformation": {
+    "appType": "ui5",
+    "catalogId": "SAP_TC_UI5_REPO_UIAD",
+    "targetMappingTitle": "Plant Shop"
+  },
+  "ui5AppDetails": {
+    "appId": "z14_plant_shop"
+  },
+  "navigation": {
+    "targetMappingId": "Z14_PLANT_SHOP_UI5R_TM",
+    "semanticObject": "Z14_Plant",
+    "action": "display",
+    "desktop": true,
+    "tablet": true,
+    "phone": true
+  },
+  "tiles": [
+    {
+      "id": "Z14_PLANT_SHOP_UI5R_AL",
+      "tileType": "static",
+      "isDefault": true,
+      "standard": {
+        "title": "Plant Shop"
+      }
+    }
+  ]
+}

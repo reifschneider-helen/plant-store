@@ -1,0 +1,31 @@
+@Metadata.layer: #CORE
+@Search.searchable: true
+
+annotate entity Z14_I_CUSTOMER_VH with
+{
+  @UI.lineItem: [ { position: 10 } ]
+  @UI.identification: [ { position: 10 } ]
+  @EndUserText.label: 'Customer ID'
+  @Search.defaultSearchElement: true
+  CustomerId;
+
+  @UI.lineItem: [ { position: 20 } ]
+  @UI.identification: [ { position: 20 } ]
+  @EndUserText.label: 'Customer full name'
+  FullName;
+
+  @UI.lineItem: [ { position: 30 } ]
+  @UI.identification: [ { position: 30 } ]
+  @EndUserText.label: 'City'
+  City;
+
+  @UI.hidden: true
+  @Search.defaultSearchElement: true
+  @Search.fuzzinessThreshold: 0.8
+  FirstName;
+
+  @UI.hidden: true  
+  @Search.defaultSearchElement: true
+  @Search.fuzzinessThreshold: 0.8
+  LastName;
+}

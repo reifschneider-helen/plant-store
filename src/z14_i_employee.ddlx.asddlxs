@@ -1,0 +1,37 @@
+@Metadata.layer: #CORE
+@Search.searchable: true
+
+annotate entity Z14_I_Employee with
+{
+  @UI.facet: [
+    { id:              'EmployeeDetails',
+      purpose:         #STANDARD,
+      type:            #IDENTIFICATION_REFERENCE,
+      label:           'Employee Data',
+      position:        10 }
+  ]
+
+  @UI.lineItem:       [ { position: 10 } ]
+  @UI.identification: [ { position: 10 } ]
+  @EndUserText.label: 'Employee ID'
+  EmployeeId;
+
+  @UI.lineItem:       [ { position: 20 } ]
+  @UI.identification: [ { position: 20 } ]
+  @EndUserText.label: 'First Name'
+  @Search.defaultSearchElement: true
+  FirstName;
+
+  @UI.lineItem:       [ { position: 30 } ]
+  @UI.identification: [ { position: 30 } ]
+  @EndUserText.label: 'Last Name'
+  @Search.defaultSearchElement: true
+  @UI.selectionField: [ { position: 10 } ]
+  LastName;
+
+  @UI.lineItem:       [ { position: 40 } ]
+  @UI.identification: [ { position: 40 } ]
+  @EndUserText.label: 'Role'
+  @UI.selectionField: [ { position: 20 } ]
+  Role;
+}

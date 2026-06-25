@@ -1,0 +1,47 @@
+@Metadata.layer: #CORE
+
+annotate entity Z14_C_DELIVERY with
+{
+  @UI.facet: [
+    { id:              'DeliveryDetails',
+      purpose:         #STANDARD,
+      type:            #IDENTIFICATION_REFERENCE,
+      label:           'Delivery Details',
+      position:        10 }
+  ]
+
+  @UI.lineItem:       [ { position: 10 } ]
+  @UI.identification: [ { position: 10 } ]
+  @EndUserText.label: 'Delivery ID'
+  DeliveryId;
+
+  @UI.lineItem:       [ { position: 20 } ]
+  @UI.identification: [ { position: 20 } ]
+  @EndUserText.label: 'Order ID'
+  @UI.selectionField: [ { position: 10 } ]
+  OrderId;
+
+  @UI.lineItem:       [ { position: 30, criticality: 'StatusCriticality' } ]
+  @UI.identification: [ { position: 30, criticality: 'StatusCriticality' } ]
+  @EndUserText.label: 'Delivery Status'
+  @UI.selectionField: [ { position: 20 } ]
+  DeliveryStatus;
+
+  @UI.lineItem:       [ { position: 40 } ]
+  @UI.identification: [ { position: 40 } ]
+  @EndUserText.label: 'Shipping Date'
+  ShippingDate;
+
+  @UI.lineItem:       [ { position: 50 } ]
+  @UI.identification: [ { position: 50 } ]
+  @EndUserText.label: 'Delivery Cost'
+  DeliveryCost;
+
+  @UI.hidden: true
+  CurrencyCode;
+
+  @UI.lineItem:       [ { position: 60 } ]
+  @UI.identification: [ { position: 60 } ]
+  @EndUserText.label: 'Tracking Number'
+  TrackingNumber;
+}

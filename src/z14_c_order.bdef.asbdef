@@ -1,0 +1,38 @@
+projection;
+strict ( 2 );
+use draft;
+
+define behavior for Z14_C_Order alias Order
+use etag
+{
+  use create;
+  use update;
+  use delete;
+
+  use action Edit;
+  use action Activate;
+  use action Discard;
+  use action Resume;
+  use action Prepare;
+
+  use association _Deliveries { create; with draft; }
+  use association _Items { create; with draft; }
+
+  use action cancelOrder;
+}
+
+define behavior for Z14_C_ORDERITEM alias Item
+{
+  use update;
+  use delete;
+
+  use association _Order { with draft; }
+}
+
+define behavior for Z14_C_DELIVERY alias Delivery
+{
+  use update;
+  use delete;
+
+  use association _Order { with draft; }
+}

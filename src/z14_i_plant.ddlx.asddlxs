@@ -1,0 +1,46 @@
+@Metadata.layer: #CORE
+@Search.searchable: true
+
+annotate entity Z14_I_Plant with
+{
+  @UI.facet: [
+    { id:              'PlantDetails',
+      purpose:         #STANDARD,
+      type:            #IDENTIFICATION_REFERENCE,
+      label:           'Plant Specifications',
+      position:        10 }
+  ]
+
+  @UI.lineItem:       [ { position: 10 } ]
+  @UI.identification: [ { position: 10 } ]
+  @EndUserText.label: 'Plant ID'
+  PlantId;
+
+  @UI.lineItem:       [ { position: 20 } ]
+  @UI.identification: [ { position: 20 } ]
+  @EndUserText.label: 'Name'
+  @Search.defaultSearchElement: true
+  Name;
+
+  @UI.lineItem:       [ { position: 30 } ]
+  @UI.identification: [ { position: 30 } ]
+  @EndUserText.label: 'Category ID'
+  @UI.selectionField: [ { position: 10 } ]
+  CategoryId;
+
+  @UI.lineItem:       [ { position: 40 } ]
+  @UI.identification: [ { position: 40 } ]
+  @EndUserText.label: 'Price'
+  Price;
+
+  @UI.hidden: true
+  CurrencyCode;
+
+  @UI.lineItem:       [ { position: 50 } ]
+  @UI.identification: [ { position: 50 } ]
+  @EndUserText.label: 'Available Stock'
+  StockQuantity;
+
+  @UI.hidden: true
+  QuantityUnit;
+}

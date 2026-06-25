@@ -1,0 +1,6 @@
+@EndUserText.label: 'Service Definition for Plant Shop App'
+define service Z14_UI_Orders {
+  expose Z14_C_Order     as Orders;
+  expose Z14_C_ORDERITEM as OrderItem;
+  expose Z14_C_DELIVERY  as Delivery;
+}
